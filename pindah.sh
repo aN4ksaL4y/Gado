@@ -23,6 +23,7 @@ while IFS= read -r LINE; do
         
         # Read the next lines for Name and Path
         read -r NAME_LINE
+        read -r ISREL_LINE
         read -r PATH_LINE
         
         # Extract Name and Path
@@ -46,14 +47,14 @@ while IFS= read -r LINE; do
 
             # Check if we found the new profile directory
             if [[ -d $NEW_PROFILE_DIR ]]; then
-                echo -e "${GREEN}Copying data from profile '$PROFILE_NAME' to '$NEW_PROFILE_NAME'...${NC}"
+                echo -e "${GREEN}Copying data from profile '$PROFILE_PATH' to '$NEW_PROFILE_NAME'...${NC}"
                 cp -r "$OLD_PROFILE_DIR/"* "$NEW_PROFILE_DIR/"
                 echo -e "${GREEN}Data copied successfully to '$NEW_PROFILE_NAME'.${NC}"
             else
                 echo -e "${RED}Failed to create or find profile '$NEW_PROFILE_NAME'.${NC}"
             fi
         else
-            echo -e "${RED}Profile '$PROFILE_NAME' does not exist in '$PROFILES_INI_DIR'!${NC}"
+            echo -e "${RED}Profile at '$OLD_PROFILE_DIR' does not exist!${NC}"
         fi
     fi
 done < "$PROFILES_INI"
