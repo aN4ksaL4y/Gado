@@ -43,11 +43,11 @@ while IFS= read -r LINE; do
             sleep 1
             
             # Find the newly created profile directory
-            NEW_PROFILE_DIR=$(find "$HOME/.mozilla/firefox" -maxdepth 1 -type d | grep -E "^.*\..*${NEW_PROFILE_NAME}$")
+            NEW_PROFILE_DIR=$(find "$HOME/.mozilla/firefox" -maxdepth 1 -type d -name "*${NEW_PROFILE_NAME}*")
 
             # Check if we found the new profile directory
             if [[ -d $NEW_PROFILE_DIR ]]; then
-                echo -e "${GREEN}Copying data from profile '$PROFILE_PATH' to '$NEW_PROFILE_NAME'...${NC}"
+                echo -e "${GREEN}Copying data from profile '$OLD_PROFILE_DIR' to '$NEW_PROFILE_NAME'...${NC}"
                 cp -r "$OLD_PROFILE_DIR/"* "$NEW_PROFILE_DIR/"
                 echo -e "${GREEN}Data copied successfully to '$NEW_PROFILE_NAME'.${NC}"
             else
